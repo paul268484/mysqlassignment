@@ -1,0 +1,77 @@
+-- ASSIGNMENT QUESTIONS 
+SHOW DATABASES;
+DROP DATABASE IF EXISTS ASSIGNMENT;
+CREATE DATABASE IF NOT EXISTS ASSIGNMENT;
+SHOW DATABASES;
+SHOW TABLES;
+
+DESC EMPL;
+USE ASSIGNMENT;
+
+CREATE TABLE EMPL(
+EMPNO INT primary key,
+ENAME VARCHAR(50),
+JOB VARCHAR(30) ,
+MGR INT,
+HIREDATE DATE,
+SAL DECIMAL(10,2),
+COMM DECIMAL(10,2),
+DEPTNO INT);
+
+SELECT * FROM EMPL;
+
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) VALUES(8369,'SMITH','CLERK',8902,'1990-12-18',800.00,20);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) VALUES(8499,'ANYA','SALESMAN',8698,'1991-02-20',1600.00,300.00,30);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) VALUES(8521,'SETH','SALESMAN',8698,'1991-02-22',1250.00,500.00,30);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) VALUES(8566,'MAHADEVAN','MANAGER',8839,'1991-04-02',2985.00,20);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) VALUES(8654,'MOMIN','SALESMAN',8698,'1991-09-28',1250.00,1400.00,30);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) VALUES(8698,'BINA','MANAGER',8839,'1991-05-01',2580.00,30);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) VALUES(8882,'SHIVANSH','MANAGER',8839,'1991-06-09',2450.00,10);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) VALUES(8888,'SCOTT','ANALYST',8566,'1992-12-09',3000.00,20);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,HIREDATE,SAL,DEPTNO) VALUES(8839,'AMIR','PRESIDENT','1991-11-18',5000.00,10);
+INSERT INTO EMPL(EMPNO, ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO) VALUES(8844,'KULDEEP','SALESMAN',8698,'1991-09-08',1500.00,0.00,30);
+
+DROP TABLE IF EXISTS EMPL;
+   
+   
+   
+   -- write a query to display the ENAME and SAl  of employees whose salary are greater than or equal to 2200
+SELECT ENAME , SAL 
+FROM empl
+WHERE SAL >=2200;
+
+-- write a query to display details of the employees who are not getting commission
+SELECT* FROM empl
+WHERE COMM IS NULL;
+
+-- write a query to display employee name and salary of those employees who dont have salary their salary in range of 2500 to 4000
+select ENAME ,  Sal 
+from empl
+where sal NOT BETWEEN 2500 AND 4000;
+
+
+-- Write a query to display to display the name, job title and salary of employees who doesn't have manager
+select ENAME ,  job as "job title" ,Sal 
+from empl
+where mgr is null;
+
+
+-- write a quer to display the name of the employees whose names contains "A" as third alpphabet
+select * from empl
+where ENAME like "__A%";
+
+-- write a quer to display the name of the employees whose names contains "T" as lastalpphabet
+select * from empl
+where ENAME like "%T";
+
+
+-- write a quer to display the name of the employees whose names contains "M" as first and "l" as last alphabet
+select * from empl
+where ENAME like "M%L";
+
+
+-- write a query to display of employees with the text  "Not Given ", if commission is null
+SELECT EMPNO, ENAME, JOB, SAL, 
+       IFNULL(COMM, 'Not Given') AS COMM, 
+       DEPTNO
+FROM EMPL;
